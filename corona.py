@@ -26,7 +26,6 @@ class data():
 	def get_data(self):
 		request = requests.get(f"https://www.parsehub.com/api/v2/projects/{self.project_token}/last_ready_run/data", params = self.params)
 		self.data = json.loads(request.text)
-		print(self.data)
 
 
 Data = data(API_KEY, PROJECT_TOKEN)
