@@ -1,7 +1,7 @@
 import tkinter as tk
 import requests
 import json
-
+import tkinter.font as tkfont
 
 
 
@@ -24,6 +24,7 @@ class data():
 		self.get_data()
 
 	def get_data(self):
+		r = requests.post("https://www.parsehub.com/api/v2/projects/{self.project_token}/run", data = self.params)
 		request = requests.get(f"https://www.parsehub.com/api/v2/projects/{self.project_token}/last_ready_run/data", params = self.params)
 		self.data = json.loads(request.text)
 
@@ -48,8 +49,11 @@ deaths_label = 0
 newcases_label = 0
 newdeaths_label = 0
 
+
+
 #Enter function
 def enter():
+	
 	global country
 	global click_enter
 	global cases_label
@@ -79,15 +83,16 @@ def enter():
 		number_of_newcases = ""
 		number_of_newdeaths = "" 
 
-		cases_label = tk.Label(frame, text = number_of_cases, bg = "Navy Blue", fg = "White")
-		deaths_label = tk.Label(frame, text = number_of_deaths, bg = "Navy Blue", fg = "White")
-		newcases_label = tk.Label(frame, text = number_of_newcases, bg = "Navy Blue", fg = "White")
-		newdeaths_label = tk.Label(frame, text = number_of_newdeaths, bg = "Navy Blue", fg = "White")
+		font3 = tkfont.Font(size = 15, weight = "bold")
+		cases_label = tk.Label(frame, text = number_of_cases, bg = "Navy Blue", fg = "White", font = font3)
+		deaths_label = tk.Label(frame, text = number_of_deaths, bg = "Navy Blue", fg = "White", font = font3)
+		newcases_label = tk.Label(frame, text = number_of_newcases, bg = "Navy Blue", fg = "White", font = font3)
+		newdeaths_label = tk.Label(frame, text = number_of_newdeaths, bg = "Navy Blue", fg = "White", font = font3)
 
-		cases_label.place(relx = 0.2, rely = 0.3)
-		deaths_label.place(relx = 0.2, rely = 0.4)
-		newcases_label.place(relx = 0.2, rely = 0.5)
-		newdeaths_label.place(relx = 0.2, rely = 0.6)
+		cases_label.place(relx = 0.25 ,rely = 0.3)
+		deaths_label.place(relx = 0.25 ,rely = 0.4)
+		newcases_label.place(relx = 0.25 ,rely = 0.5)
+		newdeaths_label.place(relx = 0.25 ,rely = 0.6)
 
 
 	else:
@@ -100,15 +105,16 @@ def enter():
 				number_of_newcases = "new cases: " + content['new_cases']
 				number_of_newdeaths = "new deaths: " + content['new_deaths']
 
-		cases_label = tk.Label(frame, text = number_of_cases, bg = "Navy Blue", fg = "White")
-		deaths_label = tk.Label(frame, text = number_of_deaths, bg = "Navy Blue", fg = "White")
-		newcases_label = tk.Label(frame, text = number_of_newcases, bg = "Navy Blue", fg = "White")
-		newdeaths_label = tk.Label(frame, text = number_of_newdeaths, bg = "Navy Blue", fg = "White")
+		font3 = tkfont.Font(size = 20, weight = "bold")
+		cases_label = tk.Label(frame, text = number_of_cases, bg = "Navy Blue", fg = "White", font = font3)
+		deaths_label = tk.Label(frame, text = number_of_deaths, bg = "Navy Blue", fg = "White", font = font3)
+		newcases_label = tk.Label(frame, text = number_of_newcases, bg = "Navy Blue", fg = "White", font = font3)
+		newdeaths_label = tk.Label(frame, text = number_of_newdeaths, bg = "Navy Blue", fg = "White", font = font3)
 
-		cases_label.place(relx = 0.2, rely = 0.3)
-		deaths_label.place(relx = 0.2, rely = 0.4)
-		newcases_label.place(relx = 0.2, rely = 0.5)
-		newdeaths_label.place(relx = 0.2, rely = 0.6)
+		cases_label.place(relx = 0.25 ,rely = 0.3)
+		deaths_label.place(relx = 0.25 ,rely = 0.4)
+		newcases_label.place(relx = 0.25 ,rely = 0.5)
+		newdeaths_label.place(relx = 0.25 ,rely = 0.6)
 
 		click_enter = 1
 
@@ -135,6 +141,19 @@ country_search.place(rely = 0.2, relx = 0.2, relwidth = 0.43, height = 25)
 
 enter_button = tk.Button(frame, text = "Enter", bg = "Grey", fg = "Black", command = enter)
 enter_button.place(relwidth = 0.1, height = 25, relx = 0.65, rely = 0.2)
+
+#header
+font2 = tkfont.Font(size = 25, weight = "bold")
+header = tk.Label(root, text = "Corona-Live", bg = "Red", fg = "White", font = font2)
+header.place(relx = 0.35)
+
+#A small note from my side
+font1 = tkfont.Font(size = 9)
+disclaimerLabel = tk.Label(root, text = "Please run this program again after 10 min to get a more accurate info", bg = "Black", fg = "White", font = font1)
+disclaimerLabel.place(relx = 0.25, rely = 0.9)
+
+disclaimerLabel2 = tk.Label(root, text = "To get the total number of cases in the world, type 'all'", bg = "Black", fg = "White", font = font1)
+disclaimerLabel2.place(rely = 0.95, relx = 0.3)
 
 
 tk.mainloop()
