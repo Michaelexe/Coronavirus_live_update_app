@@ -48,6 +48,8 @@ cases_label = 0
 deaths_label = 0
 newcases_label = 0
 newdeaths_label = 0
+wrong_input = 0
+not_available = 0
 
 
 
@@ -60,6 +62,8 @@ def enter():
 	global deaths_label
 	global newcases_label
 	global newdeaths_label
+	global wrong_input 
+	global not_available
 
 	country = country_search.get()
 
@@ -68,6 +72,9 @@ def enter():
 		deaths_label.destroy()
 		newcases_label.destroy()
 		newdeaths_label.destroy()
+
+	if wrong_input == 1:
+		not_available.destroy()
 
 
 	if country.lower() == "all":
@@ -105,18 +112,30 @@ def enter():
 				number_of_newcases = "new cases: " + content['new_cases']
 				number_of_newdeaths = "new deaths: " + content['new_deaths']
 
-		font3 = tkfont.Font(size = 20, weight = "bold")
-		cases_label = tk.Label(frame, text = number_of_cases, bg = "Navy Blue", fg = "White", font = font3)
-		deaths_label = tk.Label(frame, text = number_of_deaths, bg = "Navy Blue", fg = "White", font = font3)
-		newcases_label = tk.Label(frame, text = number_of_newcases, bg = "Navy Blue", fg = "White", font = font3)
-		newdeaths_label = tk.Label(frame, text = number_of_newdeaths, bg = "Navy Blue", fg = "White", font = font3)
+				font3 = tkfont.Font(size = 20, weight = "bold")
+				cases_label = tk.Label(frame, text = number_of_cases, bg = "Navy Blue", fg = "White", font = font3)
+				deaths_label = tk.Label(frame, text = number_of_deaths, bg = "Navy Blue", fg = "White", font = font3)
+				newcases_label = tk.Label(frame, text = number_of_newcases, bg = "Navy Blue", fg = "White", font = font3)
+				newdeaths_label = tk.Label(frame, text = number_of_newdeaths, bg = "Navy Blue", fg = "White", font = font3)
 
-		cases_label.place(relx = 0.25 ,rely = 0.3)
-		deaths_label.place(relx = 0.25 ,rely = 0.4)
-		newcases_label.place(relx = 0.25 ,rely = 0.5)
-		newdeaths_label.place(relx = 0.25 ,rely = 0.6)
+				cases_label.place(relx = 0.25 ,rely = 0.3)
+				deaths_label.place(relx = 0.25 ,rely = 0.4)
+				newcases_label.place(relx = 0.25 ,rely = 0.5)
+				newdeaths_label.place(relx = 0.25 ,rely = 0.6)
+				click_enter = 1
+				wrong_input = 0
 
-		click_enter = 1
+				break
+
+			elif content == required_country[-1] and content['name'].lower() != country.lower():
+
+				font = tkfont.Font(size = 15, weight = "bold")
+				not_available = tk.Label(frame, text = "THE COUNTRY YOU ENTERED DOES NOT EXIST!", bg = "Navy Blue", fg = "Red", font = font)
+				not_available.place(rely = 0.7, relx = 0.1)
+				click_enter = 0
+				wrong_input = 1
+
+		
 
 
 
