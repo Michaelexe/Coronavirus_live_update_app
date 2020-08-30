@@ -54,7 +54,7 @@ not_available = 0
 
 
 #Enter function
-def enter():
+def search(event):
 	
 	global country
 	global click_enter
@@ -156,9 +156,11 @@ frame.place(relheight = 0.8, relwidth = 0.8, relx = 0.1, rely = 0.1)
 
 #Taking an input with entry and a button
 country_search = tk.Entry(frame)
+country_search.bind("<Return>", search)
 country_search.place(rely = 0.2, relx = 0.2, relwidth = 0.43, height = 25)
 
-enter_button = tk.Button(frame, text = "Enter", bg = "Grey", fg = "Black", command = enter)
+enter_button = tk.Button(frame, text = "Enter", bg = "Grey", fg = "Black")
+enter_button.bind("<Button-1>", search)
 enter_button.place(relwidth = 0.1, height = 25, relx = 0.65, rely = 0.2)
 
 #header
